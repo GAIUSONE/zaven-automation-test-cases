@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="classes" name="Failed suite [Salesforce]" guice-stage="DEVELOPMENT" verbose="5">
+  <listeners>
+    <listener class-name="com.force.utility.RetryTests"/>
+  </listeners>
+  <test thread-count="2" parallel="classes" name="Services(failed)" verbose="5">
+    <classes>
+      <class name="tests.ui.services.TC04_EditLead">
+        <methods>
+          <include name="zLogin"/>
+          <include name="setReportValues"/>
+          <include name="editAccount"/>
+          <include name="tearDown"/>
+          <include name="startTestcaseReporting"/>
+          <include name="initSuite"/>
+          <include name="init"/>
+        </methods>
+      </class> <!-- tests.ui.services.TC04_EditLead -->
+    </classes>
+  </test> <!-- Services(failed) -->
+</suite> <!-- Failed suite [Salesforce] -->

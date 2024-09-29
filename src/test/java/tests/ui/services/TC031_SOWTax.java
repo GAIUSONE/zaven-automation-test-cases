@@ -1,0 +1,89 @@
+package tests.ui.services;
+
+import org.testng.annotations.Test;
+import com.force.base.ProjectHooks;
+import com.microsoft.playwright.PlaywrightException;
+import org.openqa.selenium.Keys;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import org.testng.annotations.BeforeTest;
+import page.services.CreateRFPSOWPage;
+import page.services.CreateRFPSOWPage2;
+import page.base.AdminPage;
+import page.base.LoginPage;
+import page.services.CreateRFPPage;
+import page.services.CuRegistrationPage;
+
+public class TC031_SOWTax extends ProjectHooks{
+	
+	@BeforeTest
+	public void setReportValues() {
+		testcaseName = "TC003 - Create an RFP";
+		testDescription = "Create an RFP with only mandatory fields";
+		authors = "Samanthasree";
+		category = "CU";
+	}
+	
+	@Test
+	public void createRFPSOWTax() throws InterruptedException {
+		
+		new LoginPage().doLogin();
+		Thread.sleep(3000);
+		
+		CreateRFPPage rfp = new CreateRFPPage();
+		CreateRFPSOWPage sow = new CreateRFPSOWPage();
+		CreateRFPSOWPage2 sow2 = new CreateRFPSOWPage2();
+		
+		
+		//CCR Page inputs
+				rfp.clickDraftNewRFP().enterCompanyEntityrequestingconflictcheck("SOW Tax")
+				.enterPocFirstName("Samanthasree").enterPocLastName("TestLastName")
+				.enterPocEmail("samanthasree@instrive.in").
+				enterCounterOtherPartyName("TestCounterParty").clickContinue();
+				Thread.sleep(2000);	
+				
+				//PI inputs
+				rfp.enterProjectName("SOW Tax").enterShortDesc("Test Comments");
+				Thread.sleep(5000);
+				rfp.juridictionLanguage().participationBy().proposalBy().timeZone().checkRFPTermsandConditions().
+				clickContinue(); 
+				Thread.sleep(2000);	
+				
+				//Sow inputs
+				sow2.selectScopeTax().checkTaxType().checkTaxTypeTransactional().TaxTypeTransactionalDate().
+				TaxTypeTransactionalCmts("SOW Test Comments").checkTaxTypeInvestigation().TaxTypeInvestigationDate().
+				TaxTypeInvestigationCmts("SOW Test Comments").checkTaxTypeTransferPricing().TaxTypeTransferDate().		
+				TaxTypeTransferCmts("SOW Test Comments").checkTaxTypeIndirectTax().TaxTypeIndirectDate().TaxTypeIndirectCmts("SOW Test Comments").	
+				checkTaxTypeTaxPlanning().TaxTypeTaxPlanningDate().TaxTypeTaxPlanningCmts("SOW Test Comments").checkTaxTypeTaxPolicy()
+				.TaxTypeTaxPolicyDate().TaxTypeTaxPolicyCmts("SOW Test Comments").checkTaxTypeOther().TaxTypeOtherDate().TaxTypeOtherCmts("SOW Test Comments").
+				checkTaxStagedApproach().TaxStagedApproachDate().TaxStagedApproachCmts("SOW Test Comments").checkTaxImplementation().checkTaxImplementationCorporate().	
+				TaxImplementationCorporateDate().TaxImplementationCorporateCmts("SOW Test Comments").checkTaxImplementationLegal().TaxImplementationLegalDate().
+				TaxImplementationLegalCmts("SOW Test Comments");
+				
+				
+				
+				sow.sowFileUpload();
+				rfp.clickContinue();
+				
+				
+				//Pricing inputs
+				rfp.selectCurrency().checkEstimate().checkFixedFee().checkCappedFee().clickContinue();
+				Thread.sleep(2000);	
+				
+				//Pricing inputs
+				rfp.checkKeyTeamMember().checkKeyTeamMembersCountry().checkBiographies().clickContinue();
+				Thread.sleep(2000);	
+				
+				//Bidders inputs
+				rfp.clickSelectBidders().checkLegalServicesProviders().clickConfirm().clickPreviewRFP();
+				Thread.sleep(2000);	
+				
+				//Preview inputs
+				rfp.clickSubmit();
+				Thread.sleep(2000);	
+		
+			}
+		
+      }	
+
